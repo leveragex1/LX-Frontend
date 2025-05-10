@@ -1,0 +1,31 @@
+.main {
+    background-color: #0e0f12; /* Dark background for contrast */
+    color: #d1cbcb; /* White text for readability */
+    text-align: center;
+    padding: 20px 0; /* Add padding for space around the content */
+    font-family: 'Poppins', sans-serif; /* Modern font */
+  }
+  
+  .footer p {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 300;
+  }
+  
+  .footer-links {
+    margin-top: 15px; /* Space between the copyright text and links */
+  }
+  
+  .footer-links a {
+    color: #2ecc71; /* Green color for links */
+    text-decoration: none;
+    margin: 0 10px; /* Space between each link */
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out; /* Smooth color transition on hover */
+  }
+  
+  .footer-links a:hover {
+    color: #3498db; /* Light blue on hover for a financial market theme */
+  }
+  
