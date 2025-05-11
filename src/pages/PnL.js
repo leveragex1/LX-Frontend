@@ -4,6 +4,8 @@ import axios from "axios";
 import "../styles/PnL.css";
 import { FaMoneyCheckAlt } from "react-icons/fa";
 import { Typography } from "@mui/material";
+// import { FaMoneyBillTransfer } from "react-icons/fa6";
+import { MdOutlineAttachMoney } from "react-icons/md";
 
 const PnL = () => {
   const [stocks, setStocks] = useState([]);
@@ -129,7 +131,7 @@ const PnL = () => {
   };
 
   // Payout
-  const [payoutEnabled, setPayoutEnabled] = useState(false);
+  const [payoutStatus, setPayoutStatus] = useState("Disable");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -138,7 +140,7 @@ const PnL = () => {
         const response = await axios.get(
           `https://lx-backend-yz03.onrender.com/api/payout/users/${userId}`
         );
-        setPayoutEnabled(response.data.payoutEnabled);
+        setPayoutStatus(response.data.payoutStatus); // Assuming backend sends payoutStatus now
       } catch (err) {
         console.error("Failed to fetch payout status:", err);
       } finally {
@@ -152,6 +154,10 @@ const PnL = () => {
   const handleShow = () => {
     navigate("/history");
   };
+
+  // Pending Popup
+
+  const [showPendingPopup, setShowPendingPopup] = useState(false);
 
   return (
     <div className="pnl-container">
@@ -239,15 +245,18 @@ const PnL = () => {
 
             <button
               className="payout-btn"
-              disabled={!payoutEnabled}
+              disabled={payoutStatus === "Disable"}
               onClick={() => {
-                if (payoutEnabled) {
+                if (payoutStatus === "Pending") {
+                  setShowPendingPopup(true); // show modal
+                } else if (payoutStatus === "Enable") {
                   navigate("/congrats");
                 }
               }}
               style={{
-                backgroundColor: payoutEnabled ? "#4CAF50" : "grey",
-                cursor: payoutEnabled ? "pointer" : "not-allowed",
+                backgroundColor:
+                  payoutStatus === "Disable" ? "grey" : "#4CAF50",
+                cursor: payoutStatus === "Disable" ? "not-allowed" : "pointer",
                 color: "white",
                 padding: "10px 20px",
                 border: "none",
@@ -259,6 +268,61 @@ const PnL = () => {
             >
               <FaMoneyCheckAlt /> Withdrawal
             </button>
+
+            {showPendingPopup && (
+              <div
+                style={{
+                  position: "fixed",
+                  top: 0,
+                  left: 0,
+                  width: "100vw",
+                  height: "100vh",
+                  backgroundColor: "rgba(0,0,0,0.5)",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  zIndex: 1000,
+                }}
+              >
+                <div
+                  style={{
+                    backgroundColor: "white",
+                    padding: "30px",
+                    borderRadius: "10px",
+                    textAlign: "center",
+                    width: "300px",
+                    boxShadow: "0 0 10px rgba(0,0,0,0.3)",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <h1 className="company-name">
+                Leverage <span>X</span>
+              </h1>
+                  <h2 style={{ marginBottom: "20px", color: "#ff9800" }}>
+                  <MdOutlineAttachMoney />Pending Payment!!!
+                  </h2>
+                  <p>Please clear your payment before withdrawal.</p>
+                  <p> Check your Mail for more information.</p>
+                  <button
+                    onClick={() => setShowPendingPopup(false)}
+                    style={{
+                      marginTop: "20px",
+                      padding: "10px 20px",
+                      backgroundColor: "#4CAF50",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "5px",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            )}
+
             <Typography
               variant="body1"
               color="white"

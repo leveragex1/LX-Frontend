@@ -42,7 +42,9 @@ function Dashboard() {
   // Function to fetch users from the backend
   const fetchUsers = async () => {
     try {
-      const response = await axios.get(`https://lx-backend-yz03.onrender.com/api/users`); // Get request to fetch users
+      const response = await axios.get(
+        `https://lx-backend-yz03.onrender.com/api/users`
+      ); // Get request to fetch users
       setUsers(response.data); // Update users state with fetched data
     } catch (error) {
       console.error("Error fetching users:", error); // Handle errors while fetching users
@@ -52,7 +54,9 @@ function Dashboard() {
   // Function to fetch WatchList1 stocks from the backend
   const fetchWatchList1Stocks = async () => {
     try {
-      const response = await axios.get(`https://lx-backend-yz03.onrender.com/api/watchlist1`); // Get request to fetch WatchList1 stocks
+      const response = await axios.get(
+        `https://lx-backend-yz03.onrender.com/api/watchlist1`
+      ); // Get request to fetch WatchList1 stocks
       setWatchList1Stocks(response.data); // Update WatchList1 stocks state with fetched data
     } catch (error) {
       handleError("Error fetching WatchList1 stocks"); // Handle errors while fetching WatchList1 stocks
@@ -62,7 +66,9 @@ function Dashboard() {
   // Function to fetch WatchList2 stocks from the backend
   const fetchWatchList2Stocks = async () => {
     try {
-      const response = await axios.get(`https://lx-backend-yz03.onrender.com/api/watchlist2`); // Get request to fetch WatchList2 stocks
+      const response = await axios.get(
+        `https://lx-backend-yz03.onrender.com/api/watchlist2`
+      ); // Get request to fetch WatchList2 stocks
       setWatchList2Stocks(response.data); // Update WatchList2 stocks state with fetched data
     } catch (error) {
       handleError("Error fetching WatchList2 stocks"); // Handle errors while fetching WatchList2 stocks
@@ -85,9 +91,12 @@ function Dashboard() {
       return;
     }
     try {
-      await axios.put(`https://lx-backend-yz03.onrender.com/api/users/balance/${userId}`, {
-        balance,
-      }); // PUT request to update balance
+      await axios.put(
+        `https://lx-backend-yz03.onrender.com/api/users/balance/${userId}`,
+        {
+          balance,
+        }
+      ); // PUT request to update balance
       handleSuccess("User balance updated successfully!"); // Show success message
       fetchUsers(); // Refresh the user list after updating balance
     } catch (error) {
@@ -243,24 +252,26 @@ function Dashboard() {
     );
   };
 
-  // Payout 
+  // Payout
 
-  const togglePayout = async (userId, status) => {
+  const togglePayout = async (userId, newStatus) => {
     try {
-        await axios.put(`https://lx-backend-yz03.onrender.com/api/payout/${userId}`, { payoutEnabled: status });
-        handleSuccess(`Payout ${status ? 'enabled' : 'disabled'} successfully!`);
-        fetchUsers(); // Refresh user list
+      await axios.put(
+        `https://lx-backend-yz03.onrender.com/api/payout/${userId}`,
+        { payoutStatus: newStatus }
+      );
+      handleSuccess(`Payout status set to ${newStatus}`);
+      fetchUsers(); // Refresh
     } catch (error) {
-        handleError('Failed to update payout status');
+      handleError("Failed to update payout status");
     }
-};
+  };
 
-const handleShow = () => {
-  navigate('/putBalance');
-}
+  const handleShow = () => {
+    navigate("/putBalance");
+  };
 
-// here i 'll make button consistent so that when admin 
-
+  // here i 'll make button consistent so that when admin
 
   // JSX to render the dashboard UI
   return (
@@ -371,13 +382,10 @@ const handleShow = () => {
             value={watchlist2_B}
             onChange={(e) => setWatchlist2_B(e.target.value)} // Input for B value
           />
-
           {/* Add Withdrawal History */}
-
           <button onClick={addStockToWatchList2}>
             Add Stock to WatchList2
           </button>{" "}
-          
           {/* Button to add stock */}
         </div>
 
@@ -424,18 +432,13 @@ const handleShow = () => {
           </tbody>
         </table>
       </div>
-
       {/* Button For Adding Withdrawal History */}
-
       <div>
-        Add Users Withdrawal History 👉 
-      <button
-      onClick={() => handleShow()}
-      >
-        Add Users Withdrawal History
-      </button>
+        Add Users Withdrawal History 👉
+        <button onClick={() => handleShow()}>
+          Add Users Withdrawal History
+        </button>
       </div>
-
       {/* User Balance Section */}
       <div className="users-section">
         <h2>Manage User Balances</h2>
@@ -471,16 +474,14 @@ const handleShow = () => {
                   </button>
                 </td>
                 <td>
-
-                  <button
-                    onClick={() => togglePayout(user._id, !user.payoutEnabled)}
-                    className={
-                      user.payoutEnabled ? "disable-btn" : "enable-btn"
-                    }
+                  <select
+                    value={user.payoutStatus}
+                    onChange={(e) => togglePayout(user._id, e.target.value)}
                   >
-                    {user.payoutEnabled ? "Disable Payout" : "Enable Payout"}
-                  </button>
-
+                    <option value="Enable">Enable</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Disable">Disable</option>
+                  </select>
                 </td>
               </tr>
             ))}

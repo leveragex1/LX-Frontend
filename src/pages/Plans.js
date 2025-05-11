@@ -52,7 +52,7 @@ function Plans() {
     const handlePayment = async () => {
         try {
             const userId = localStorage.getItem('userId');
-            const response = await axios.post('http://localhost:8080/api/plans/purchase', { userId, plan: selectedPlan });
+            const response = await axios.post('https://lx-backend-yz03.onrender.com/api/plans/purchase', { userId, plan: selectedPlan });
 
             if (response.status === 200) {
                 handleSuccess(response.data.msg);
@@ -125,7 +125,7 @@ function Plans() {
                     </div>
                     <div className='amt'>
                         <h3>Prime Plan (₹ 10,000)</h3>
-                        <p>For serious traders aiming to trade with large amounts of capital and maximize their profit potential, the Prime Plan offers the highest funding level. At Rs 10,000, this plan is built for experienced traders who want to significantly scale up their operations and have access to substantial funding. If you’re ready to trade like a pro, the Prime Plan is for you.</p>
+                        <p>For serious traders aiming to trade with large amounts of capital and maximize their profit potential, the Prime Plan offers the highest funding level. At Rs 10,000, this plan is built for experienced traders who want to significantly scale up their operations and have access to substantial funding. If you're ready to trade like a pro, the Prime Plan is for you.</p>
                     </div>
                 </div>
 
