@@ -5,7 +5,7 @@ import { handleError, handleSuccess } from '../utils';
 import { ToastContainer } from 'react-toastify';
 import "../styles/Plans.css";
 
-import qrcode from "../Assets/jupitorQR.jpg";
+import qrcode1 from "../Assets/jupitorQR.jpg";
 import upiImg from "../Assets/upiImg.png";
 
 function Plans() {
@@ -138,7 +138,7 @@ function Plans() {
                         <h2 className='qr-h2'>Pay for {selectedPlan}</h2>
                         <p className='qr-p'>Total: ₹ {selectedPlan === 'Rapid' ? '1000' : selectedPlan === 'Evolution' ? '5000' : '10,000'} /-</p>
                         <p className='pay-here'>Pay Here</p>
-                        <img src={qrcode} alt="QR Code" className="qr-image" />
+                        <img src={qrcode1} alt="QR Code" className="qr-image" />
                         <p className='qr-p qr-pq'>leveragexfund-2@oksbi</p>
                         <img src={upiImg} alt="upi-logo" className='upi-img' />
                         <input placeholder='Enter Txn Number' type="number" className="input-num" required />
