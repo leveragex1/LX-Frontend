@@ -21,7 +21,7 @@ const WatchList1 = () => {
 
   const fetchStocks = async () => {
     try {
-      const response = await axios.get('https://lx-backend-yz03.onrender.com/api/watchlist1');
+      const response = await axios.get('https://lx-backend-wwos.onrender.com/api/watchlist1');
       setStocks(response.data);
     } catch (error) {
       console.error('Error fetching WatchList1 stocks:', error);
@@ -32,7 +32,7 @@ const WatchList1 = () => {
     if (!userId) return;
 
     try {
-      const response = await axios.get(`https://lx-backend-yz03.onrender.com/api/users/balance/${userId}`);
+      const response = await axios.get(`https://lx-backend-wwos.onrender.com/api/users/balance/${userId}`);
       setCurrentBalance(response.data.balance);
       setUpdatedBalance(response.data.balance);
     } catch (error) {
@@ -75,7 +75,7 @@ const WatchList1 = () => {
     }
 
     try {
-      const response = await axios.post('https://lx-backend-yz03.onrender.com/api/watchlist1/buy', {
+      const response = await axios.post('https://lx-backend-wwos.onrender.com/api/watchlist1/buy', {
         stockName: selectedOption.name,
         userId: userId,
         quantity: quantity
