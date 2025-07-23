@@ -65,11 +65,11 @@ function Plans() {
                     navigate('/watchlist1');
                 }
             }
-            catch (error) {
+        }
+        catch (error) {
                 handleError(error.response?.data?.msg || 'Welcome to LeverageX Team ✨');
                 navigate('/watchlist1');
            }
-        } 
     };
 
     return (
