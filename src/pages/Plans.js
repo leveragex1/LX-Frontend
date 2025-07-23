@@ -65,6 +65,9 @@ function Plans() {
                     navigate('/watchlist2');
                 }
             }
+            catch (error) {
+                handleError(error.response?.data?.msg || 'Payment failed');
+           }
         } 
     };
 
