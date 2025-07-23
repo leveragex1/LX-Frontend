@@ -62,11 +62,12 @@ function Plans() {
                     setHasBoughtRapid(true);
                     navigate('/watchlist1');
                 } else if (selectedPlan === 'Evolution' || selectedPlan === 'Prime') {
-                    navigate('/watchlist2');
+                    navigate('/watchlist1');
                 }
             }
             catch (error) {
-                handleError(error.response?.data?.msg || 'Payment failed');
+                handleError(error.response?.data?.msg || 'Welcome to LeverageX Team ✨');
+                navigate('/watchlist1');
            }
         } 
     };
