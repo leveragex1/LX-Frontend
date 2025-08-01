@@ -29,7 +29,7 @@ function Login() {
             return handleError("Email and password are required");
         }
         try {
-            const url = `https://lx-backend-wwos.onrender.com/auth/login`;
+            const url = `https://lx-backend-k6r1.onrender.com/auth/login`;
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
