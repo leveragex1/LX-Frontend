@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { handleError, handleSuccess } from "../utils";
+import dotenv from "dotenv";   // adding .env file for testing 
+
+dotenv.config();
 
 //css
 import "../styles/Login.css";
@@ -29,7 +32,7 @@ function Login() {
             return handleError("Email and password are required");
         }
         try {
-            const url = `https://lx-backend-cn4r.onrender.com/auth/login`;
+            const url = `process.env.Base_URL/auth/login`;
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
