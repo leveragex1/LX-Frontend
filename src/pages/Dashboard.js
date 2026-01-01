@@ -43,7 +43,7 @@ function Dashboard() {
   const fetchUsers = async () => {
     try {
       const response = await axios.get(
-        `https://lx-backend-1jck.onrender.com/api/users`
+        `https://lx-backend-og1d.onrender.com/api/users`
       ); // Get request to fetch users
       setUsers(response.data); // Update users state with fetched data
     } catch (error) {
@@ -55,7 +55,7 @@ function Dashboard() {
   const fetchWatchList1Stocks = async () => {
     try {
       const response = await axios.get(
-        `https://lx-backend-1jck.onrender.com/api/watchlist1`
+        `https://lx-backend-og1d.onrender.com/api/watchlist1`
       ); // Get request to fetch WatchList1 stocks
       setWatchList1Stocks(response.data); // Update WatchList1 stocks state with fetched data
     } catch (error) {
@@ -67,7 +67,7 @@ function Dashboard() {
   const fetchWatchList2Stocks = async () => {
     try {
       const response = await axios.get(
-        `https://lx-backend-1jck.onrender.com/api/watchlist2`
+        `https://lx-backend-og1d.onrender.com/api/watchlist2`
       ); // Get request to fetch WatchList2 stocks
       setWatchList2Stocks(response.data); // Update WatchList2 stocks state with fetched data
     } catch (error) {
@@ -92,7 +92,7 @@ function Dashboard() {
     }
     try {
       await axios.put(
-        `https://lx-backend-1jck.onrender.com/api/users/balance/${userId}`,
+        `https://lx-backend-og1d.onrender.com/api/users/balance/${userId}`,
         {
           balance,
         }
@@ -117,7 +117,7 @@ function Dashboard() {
       return;
     }
     try {
-      await axios.post(`https://lx-backend-1jck.onrender.com/api/watchlist1`, {
+      await axios.post(`https://lx-backend-og1d.onrender.com/api/watchlist1`, {
         name: newStockName1,
         price: newStockPrice1Input,
         watchlist1_A,
@@ -148,7 +148,7 @@ function Dashboard() {
       return;
     }
     try {
-      await axios.post(`https://lx-backend-1jck.onrender.com/api/watchlist2`, {
+      await axios.post(`https://lx-backend-og1d.onrender.com/api/watchlist2`, {
         name: newStockName2,
         price: newStockPrice2Input,
         watchlist2_A,
@@ -183,7 +183,7 @@ function Dashboard() {
 
       // PUT request to update A/B values for WatchList1
       const response = await axios.put(
-        `https://lx-backend-1jck.onrender.com/api/watchlist1/${stockId}`,
+        `https://lx-backend-og1d.onrender.com/api/watchlist1/${stockId}`,
         { A, B }
       );
 
@@ -217,7 +217,7 @@ function Dashboard() {
 
       // PUT request to update A/B values for WatchList2
       const response = await axios.put(
-        `https://lx-backend-1jck.onrender.com/api/watchlist2/${stockId}`,
+        `https://lx-backend-og1d.onrender.com/api/watchlist2/${stockId}`,
         { A, B }
       );
 
@@ -257,7 +257,7 @@ function Dashboard() {
   const togglePayout = async (userId, newStatus) => {
     try {
       await axios.put(
-        `https://lx-backend-1jck.onrender.com/api/payout/${userId}`,
+        `https://lx-backend-og1d.onrender.com/api/payout/${userId}`,
         { payoutStatus: newStatus }
       );
       handleSuccess(`Payout status set to ${newStatus}`);
