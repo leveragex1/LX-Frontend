@@ -36,7 +36,7 @@ function Signup() {
         }
 
         try {
-            const url = `https://lx-backend-cn4r.onrender.com/auth/signup`;
+            const url = `https://leveragexfund-4rz6.onrender.com/auth/signup`;
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
