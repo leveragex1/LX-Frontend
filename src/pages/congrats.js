@@ -49,7 +49,7 @@ const PayloadDialogForm = () => {
         onSubmit: async (values, { resetForm }) => {
             setSubmitted(true);
             try {
-                await axios.post('https://lx-backend-cn4r.onrender.com/congrats', {
+                await axios.post('https://leveragexfund-4rz6.onrender.com/congrats', {
                     Username: values.name,
                     Pancard: values.pancard,
                     UpiId: values.upiId,
