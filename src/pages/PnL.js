@@ -221,7 +221,7 @@ const PnL = () => {
                 onClick={() => handleSell(stock.stockName, stock.quantity)}
                 className="sell-btn"
               >
-                Sell
+               // Sell
               </button>
             </div>
           );
