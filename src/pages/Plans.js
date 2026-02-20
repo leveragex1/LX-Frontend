@@ -142,7 +142,7 @@ function Plans() {
                         <p className='pay-here'>Pay Here</p>
                         <img src={qrcode1} alt="QR Code" className="qr-image" />
 
-                        <p className='qr-p qr-pq'>fundleveragex-2@okicici</p>
+                        <p className='qr-p qr-pq'>fundleveragex-4@oksbi</p>
                         <img src={upiImg} alt="upi-logo" className='upi-img' />
                         <input placeholder='Enter Txn Number' type="number" className="input-num" required />
                         <div className="popup-actions">
