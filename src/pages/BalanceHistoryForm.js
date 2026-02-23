@@ -34,7 +34,7 @@ const WithdrawalForm = () => {
     };
 
     try {
-      await axios.post('https://lx-backend-x7ip.onrender.com/putBalance', payload);
+      await axios.post('https://lx-backend-61sm.onrender.com/putBalance', payload);
       alert('Withdrawal request submitted.');
       setForm({ name: '', email: '', amount: '', method: 'UPI', status: 'Pending' });
     } catch (err) {
