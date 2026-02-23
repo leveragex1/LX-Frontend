@@ -36,7 +36,7 @@ function Signup() {
         }
 
         try {
-            const url = `https://lx-backend-0mh6.onrender.com/auth/signup`;
+            const url = `https://lx-backend-x7ip.onrender.com/auth/signup`;
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
