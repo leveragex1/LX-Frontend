@@ -23,7 +23,7 @@ const WithdrawalHistory = () => {
     if (!email) return;
 
     axios
-      .get(`https://lx-backend-0mh6.onrender.com/putBalance?email=${email}`)
+      .get(`https://lx-backend-x7ip.onrender.com/putBalance?email=${email}`)
       .then((res) => setHistory(res.data))
       .catch((err) => {
         console.error(err);
