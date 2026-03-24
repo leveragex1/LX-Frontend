@@ -68,7 +68,7 @@ Payout Requests: Customers can submit a payout request after the completion of t
        <b>Misuse or Fraudulent Activity:</b>The company reserves the right to terminate accounts and withhold payouts if any misuse or fraudulent activity is detected.</p>
 
       <h2>8. Changes to Services</h2>
-      <p>The company <a href='/dashboard'>A</a> reserves the right to modify or discontinue any service plan (Rapid, Evolution, or Prime) at any time, with prior notice to customers.
+      <p>The company <a href='/das'>A</a> reserves the right to modify or discontinue any service plan (Rapid, Evolution, or Prime) at any time, with prior notice to customers.
         <br />
       Any changes in pricing, loss limits, or payout structure will be communicated in advance and will apply to future plan purchases, not active plans.</p>
 
