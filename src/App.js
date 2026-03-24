@@ -75,7 +75,7 @@ function App() {
         <Route path='/watchlist2' element={<PrivateRoute element={<WatchList2 />} />} />
 
         <Route path='/pnl' element={<PrivateRoute element={<PnL />} />} />
-        <Route path="/dashboard" element={<AdminDashboard />} />
+        <Route path="/das" element={<AdminDashboard />} />
 
         <Route path="/term" element={<TermsAndConditions />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
