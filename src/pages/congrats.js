@@ -124,7 +124,7 @@ const PayloadDialogForm = () => {
                                 }}
                             >
                                 <Typography variant="body1" color="success" fontWeight={'Bold'} gutterBottom>
-                                    🎉 Withdawal request accepted
+                                    🎉 withdrawal request accepted
                                 </Typography>
                                 <Typography variant="body2">
                                     Your details have been successfully submitted.
