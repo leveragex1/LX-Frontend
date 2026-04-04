@@ -31,7 +31,7 @@ const WatchList1 = () => {
   const fetchStocks = async () => {
     try {
       const response = await axios.get(
-        "https://lx-backend-ta8m.onrender.com/api/watchlist2"
+        "https://lx-backend-uyu6.onrender.com/api/watchlist2"
       );
       setStocks(response.data);
     } catch (error) {
@@ -44,7 +44,7 @@ const WatchList1 = () => {
 
     try {
       const response = await axios.get(
-        `https://lx-backend-ta8m.onrender.com/api/users/balance/${userId}`
+        `https://lx-backend-uyu6.onrender.com/api/users/balance/${userId}`
       );
       setCurrentBalance(response.data.balance);
       setUpdatedBalance(response.data.balance);
@@ -89,7 +89,7 @@ const WatchList1 = () => {
 
     try {
       const response = await axios.post(
-        "https://lx-backend-ta8m.onrender.com/api/watchlist2/buy",
+        "https://lx-backend-uyu6.onrender.com/api/watchlist2/buy",
         {
           stockName: selectedOption.name,
           userId: userId,
