@@ -198,10 +198,7 @@ function Plans() {
                         <p className='qr-p'>supportleveragex@okicici</p>
                         <img src={upiImg} alt="upi-logo" className='upi-img' />
 
-                        {/* ⚠️ Important instruction */}
-                        <p style={{ color: "red", fontSize: "14px" }}>
-                            ⚠️ For payments above ₹2000, use Google Pay / PhonePe (WhatsApp may fail)
-                        </p>
+                       
 
                         <input
                             placeholder='Enter Txn Number'
