@@ -157,10 +157,9 @@ function Plans() {
 
                         <img src={upiImg} alt="upi-logo" className='upi-img' />
 
-                        {/* ✅ 12 DIGIT TXN INPUT */}
                         <input
                             type="text"
-                            placeholder="Enter 12-digit Txn Number"
+                            placeholder="Enter  Txn Number"
                             className="input-num"
                             value={txnNumber}
                             onChange={(e) => {
@@ -168,13 +167,6 @@ function Plans() {
                                 setTxnNumber(value);
                             }}
                         />
-
-                        {/* ✅ VALIDATION MESSAGE */}
-                        {txnNumber && txnNumber.length !== 12 && (
-                            <p style={{ color: 'red', fontSize: '12px' }}>
-                                Transaction number must be exactly 12 digits
-                            </p>
-                        )}
 
                         <div className="popup-actions">
                             <button
