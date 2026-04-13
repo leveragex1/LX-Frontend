@@ -136,7 +136,8 @@ function Plans() {
                 <div className="popup-overlay">
                     <div className="popup">
 
-                        <h1>{selectedPlan} Plan</h1>
+                        <h2>Complete Payment</h2>
+                        <p>{selectedPlan} Plan</p>
 
                         <div className="amount-box">
                             <span>Total</span>
@@ -161,7 +162,6 @@ function Plans() {
                             />
                         )}
 
-                        {/* 🔘 PAY BUTTON */}
                         <button
                             className="pay-btn"
                             onClick={() => {
@@ -174,33 +174,10 @@ function Plans() {
 
                         <p>OR</p>
 
-                        {/* 🔥 QR BUTTON (SAME STYLE) */}
-                        <button
-                            className="pay-btn"
-                            style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                alignItems: "center",
-                                gap: "8px",
-                                marginTop: "10px"
-                            }}
-                            onClick={() => {
-                                const link = getUpiLink();
-                                if (link) window.location.href = link;
-                            }}
-                        >
-                            <img
-                                src={qrcode1}
-                                alt="QR"
-                                style={{
-                                    width: "120px",
-                                    borderRadius: "10px",
-                                    background: "white",
-                                    padding: "5px"
-                                }}
-                            />
-                            <span>Scan & Pay via UPI</span>
-                        </button>
+                        <div className="qr-box">
+                            <img src={qrcode1} alt="QR" className="qr-image" />
+                            <p>supportleveragex@okicici</p>
+                        </div>
 
                         <img src={upiImg} alt="upi" className="upi-img" />
 
@@ -208,6 +185,10 @@ function Plans() {
                             placeholder="Enter Transaction ID"
                             className="input-num"
                         />
+
+                        <p style={{ color: "red", fontSize: "12px" }}>
+                            Use Google Pay / PhonePe above ₹2000
+                        </p>
 
                         <div className="popup-actions">
                             <button className="done-btn" onClick={handlePayment}>
