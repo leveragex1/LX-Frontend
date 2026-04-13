@@ -13,7 +13,7 @@ function Plans() {
     const [showPopup, setShowPopup] = useState(false);
     const [hasBoughtRapid, setHasBoughtRapid] = useState(false);
     const [currentPlan, setCurrentPlan] = useState(null);
-    const [customAmount, setCustomAmount] = useState(""); // 🔥 for Prime
+    const [customAmount, setCustomAmount] = useState("");
 
     const navigate = useNavigate();
 
@@ -48,25 +48,20 @@ function Plans() {
             alert('You cannot buy the Rapid plan again!');
         } else {
             setSelectedPlan(plan);
-            setCustomAmount(""); // reset for Prime
+            setCustomAmount("");
             setShowPopup(true);
         }
     };
 
-    // 🔥 Dynamic UPI link
     const getUpiLink = () => {
         let amount = 0;
 
-        if (selectedPlan === 'Rapid') {
-            amount = 1000;
-        } else if (selectedPlan === 'Evolution') {
-            amount = 5000;
-        } else if (selectedPlan === 'Prime') {
-            amount = customAmount;
-        }
+        if (selectedPlan === 'Rapid') amount = 1000;
+        else if (selectedPlan === 'Evolution') amount = 5000;
+        else if (selectedPlan === 'Prime') amount = customAmount;
 
         if (!amount || Number(amount) <= 0) {
-            alert("Please enter a valid amount");
+            alert("Please enter valid amount");
             return;
         }
 
@@ -86,11 +81,10 @@ function Plans() {
                 handleSuccess(response.data.msg);
                 setShowPopup(false);
                 setCurrentPlan(selectedPlan);
-
                 navigate('/watchlist1');
             }
         } catch (error) {
-            handleError(error.response?.data?.msg || 'Welcome to LeverageX Team ✨');
+            handleError(error.response?.data?.msg || 'Welcome to LeverageX ✨');
             navigate('/watchlist1');
         }
     };
@@ -99,125 +93,144 @@ function Plans() {
         <div className="plans-container">
             <h1 className="plans-title">Membership Plans</h1>
 
-            <div className="plans-container">
-                <table className="plans-table">
-                    <thead>
-                        <tr>
-                            <th>Plan's</th>
-                            <th>Trading Balance</th>
-                            <th>Minimum Trading Days</th>
-                            <th>Margin</th>
-                            <th>Plan Cost</th>
-                            <th>Life Cycle</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody className='membership-plan'>
-                        {['Rapid', 'Evolution', 'Prime'].map((plan, index) => (
-                            <tr key={index}>
-                                <td>{plan}</td>
-                                <td>
-                                    {plan === 'Rapid'
-                                        ? '₹10,000'
-                                        : plan === 'Evolution'
-                                        ? '₹50,000'
-                                        : '₹Custom'}
-                                </td>
-                                <td>5 Days</td>
-                                <td>10X</td>
-                                <td>
-                                    {plan === 'Rapid'
-                                        ? '₹1,000'
-                                        : plan === 'Evolution'
-                                        ? '₹5,000'
-                                        : 'Custom'}
-                                </td>
-                                <td>{plan === 'Rapid' ? 'One Time' : 'Unlimited'}</td>
-                                <td>
-                                    <button
-                                        className={
-                                            hasBoughtRapid && plan === 'Rapid'
-                                                ? "disabled-btn"
-                                                : "buy-now-btn"
-                                        }
-                                        onClick={() => buyPlan(plan)}
-                                        disabled={hasBoughtRapid && plan === 'Rapid'}
-                                    >
-                                        {hasBoughtRapid && plan === 'Rapid'
-                                            ? 'Plan Used'
-                                            : 'Buy Now'}
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+            <table className="plans-table">
+                <thead>
+                    <tr>
+                        <th>Plan</th>
+                        <th>Balance</th>
+                        <th>Days</th>
+                        <th>Margin</th>
+                        <th>Cost</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
 
+                <tbody>
+                    {['Rapid', 'Evolution', 'Prime'].map((plan, i) => (
+                        <tr key={i}>
+                            <td>{plan}</td>
+                            <td>{plan === 'Rapid' ? '₹10,000' : plan === 'Evolution' ? '₹50,000' : 'Custom'}</td>
+                            <td>5</td>
+                            <td>10X</td>
+                            <td>{plan === 'Rapid' ? '₹1,000' : plan === 'Evolution' ? '₹5,000' : 'Custom'}</td>
+
+                            <td>
+                                <button
+                                    className={hasBoughtRapid && plan === 'Rapid' ? "disabled-btn" : "buy-now-btn"}
+                                    onClick={() => buyPlan(plan)}
+                                    disabled={hasBoughtRapid && plan === 'Rapid'}
+                                >
+                                    {hasBoughtRapid && plan === 'Rapid' ? 'Used' : 'Buy Now'}
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+
+            {/* 🔥 PROFESSIONAL PAYMENT POPUP */}
             {showPopup && (
                 <div className="popup-overlay">
-                    <div className="popup qr-background">
-                        <h2 className='qr-h2'>Pay for {selectedPlan}</h2>
+                    <div className="popup">
 
-                        {/* ✅ Amount Display */}
-                        <p className='qr-p'>
-                            Total: ₹ {
-                                selectedPlan === 'Rapid'
-                                    ? 1000
-                                    : selectedPlan === 'Evolution'
-                                    ? 5000
-                                    : customAmount || 0
-                            } /-
+                        {/* Header */}
+                        <div style={{ display: "flex", justifyContent: "space-between" }}>
+                            <h3>LeverageX Payment</h3>
+                            <span style={{ cursor: "pointer" }} onClick={() => setShowPopup(false)}>✕</span>
+                        </div>
+
+                        {/* Plan */}
+                        <p style={{ marginTop: "5px", color: "gray" }}>
+                            {selectedPlan} Plan
                         </p>
 
-                        {/* 🔥 Input for Prime only */}
+                        {/* Amount */}
+                        <div style={{
+                            background: "#f5f5f5",
+                            padding: "15px",
+                            borderRadius: "10px",
+                            marginTop: "10px"
+                        }}>
+                            <p>Total Amount</p>
+                            <h2>
+                                ₹{
+                                    selectedPlan === 'Rapid'
+                                        ? 1000
+                                        : selectedPlan === 'Evolution'
+                                        ? 5000
+                                        : customAmount || 0
+                                }
+                            </h2>
+                        </div>
+
+                        {/* Prime Input */}
                         {selectedPlan === 'Prime' && (
                             <input
                                 type="number"
-                                placeholder="Enter amount for Prime"
+                                placeholder="Enter amount"
                                 value={customAmount}
                                 onChange={(e) => setCustomAmount(e.target.value)}
-                                className="input-num"
+                                style={{ width: "100%", padding: "10px", marginTop: "10px" }}
                             />
                         )}
 
-                        <p className='pay-here'>Pay Here</p>
-
-                        {/* 🔥 Clickable QR */}
-                        <img
-                            src={qrcode1}
-                            alt="QR Code"
-                            className="qr-image"
-                            style={{ cursor: "pointer" }}
+                        {/* Pay Button */}
+                        <button
                             onClick={() => {
                                 const link = getUpiLink();
                                 if (link) window.location.href = link;
                             }}
-                        />
+                            style={{
+                                width: "100%",
+                                padding: "12px",
+                                background: "#0f9d58",
+                                color: "white",
+                                border: "none",
+                                borderRadius: "8px",
+                                marginTop: "10px",
+                                cursor: "pointer"
+                            }}
+                        >
+                            Pay via UPI App
+                        </button>
 
-                        <p className='qr-p'>supportleveragex@okicici</p>
-                        <img src={upiImg} alt="upi-logo" className='upi-img' />
+                        <p style={{ margin: "10px 0" }}>OR</p>
 
-                       
-
-                        <input
-                            placeholder='Enter Txn Number'
-                            type="number"
-                            className="input-num"
-                            required
-                        />
-
-                        <div className="popup-actions">
-                            <button className="done-btn" onClick={handlePayment}>
-                                Done
-                            </button>
-                            <button
-                                className="cancel-btn"
-                                onClick={() => setShowPopup(false)}
-                            >
-                                X
-                            </button>
+                        {/* QR */}
+                        <div style={{ textAlign: "center" }}>
+                            <img src={qrcode1} alt="QR" style={{ width: "150px" }} />
+                            <p>supportleveragex@okicici</p>
                         </div>
+
+                        <img src={upiImg} alt="upi" style={{ width: "120px", marginTop: "10px" }} />
+
+                        {/* Txn */}
+                        <input
+                            placeholder="Enter Transaction ID"
+                            style={{ width: "100%", padding: "10px", marginTop: "10px" }}
+                        />
+
+                        <p style={{ color: "red", fontSize: "12px" }}>
+                            Use Google Pay / PhonePe above ₹2000
+                        </p>
+
+                        {/* Confirm */}
+                        <button
+                            onClick={handlePayment}
+                            style={{
+                                width: "100%",
+                                padding: "12px",
+                                background: "black",
+                                color: "white",
+                                border: "none",
+                                borderRadius: "8px",
+                                marginTop: "10px",
+                                cursor: "pointer"
+                            }}
+                        >
+                            Confirm Payment
+                        </button>
+
                     </div>
                 </div>
             )}
