@@ -243,7 +243,7 @@ function Plans() {
                         {/* Txn Number Input */}
                         <input
                             type="text"
-                            placeholder="Enter 8-digit Txn Number"
+                            placeholder="Enter Txn Number"
                             className="input-num"
                             value={txnNumber}
                             onChange={(e) => {
