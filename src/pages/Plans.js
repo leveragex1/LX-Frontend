@@ -186,9 +186,6 @@ function Plans() {
                             className="input-num"
                         />
 
-                        <p style={{ color: "red", fontSize: "12px" }}>
-                            Use Google Pay / PhonePe above ₹2000
-                        </p>
 
                         <div className="popup-actions">
                             <button className="done-btn" onClick={handlePayment}>
