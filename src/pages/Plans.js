@@ -136,9 +136,19 @@ function Plans() {
                 <div className="popup-overlay">
                     <div className="popup">
 
-                      <h2>{selectedPlan} Plan</h2>
+                        <h1>{selectedPlan} Plan</h1>
 
-                        <div className="amount-box">
+                        {/* 🔥 Gradient Amount */}
+                        <div
+                            className="amount-box"
+                            style={{
+                                background: "linear-gradient(135deg, #0f9d58, #22c55e)",
+                                color: "white",
+                                borderRadius: "12px",
+                                padding: "15px",
+                                marginBottom: "10px"
+                            }}
+                        >
                             <span>Total</span>
                             <h1>
                                 ₹{
@@ -161,6 +171,7 @@ function Plans() {
                             />
                         )}
 
+                        {/* 🔥 Pay Button */}
                         <button
                             className="pay-btn"
                             onClick={() => {
@@ -173,9 +184,33 @@ function Plans() {
 
                         <p>OR</p>
 
-                        <div className="qr-box">
-                            <img src={qrcode1} alt="QR" className="qr-image" />
-                            <p>supportleveragex@okicici</p>
+                        {/* 🔥 QR as Button */}
+                        <div
+                            className="pay-btn"
+                            style={{
+                                marginTop: "10px",
+                                padding: "15px",
+                                borderRadius: "12px",
+                                cursor: "pointer",
+                                textAlign: "center"
+                            }}
+                            onClick={() => {
+                                const link = getUpiLink();
+                                if (link) window.location.href = link;
+                            }}
+                        >
+                            <img
+                                src={qrcode1}
+                                alt="QR"
+                                style={{
+                                    width: "120px",
+                                    borderRadius: "8px",
+                                    marginBottom: "8px"
+                                }}
+                            />
+                            <p style={{ margin: 0, fontWeight: "600" }}>
+                                Scan & Pay via UPI
+                            </p>
                         </div>
 
                         <img src={upiImg} alt="upi" className="upi-img" />
