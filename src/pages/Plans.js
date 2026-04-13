@@ -243,7 +243,7 @@ function Plans() {
                         {/* Txn Number Input */}
                         <input
                             type="text"
-                            placeholder="Enter 8-digit Txn Number"
+                            placeholder="Enter Txn Number"
                             className="input-num"
                             value={txnNumber}
                             onChange={(e) => {
@@ -252,12 +252,6 @@ function Plans() {
                             }}
                         />
 
-                        {/* Validation Message */}
-                        {txnNumber && txnNumber.length !== 8 && (
-                            <p style={{ color: 'red', fontSize: '12px' }}>
-                                Transaction number must be exactly 8 digits
-                            </p>
-                        )}
 
                         <div className="popup-actions">
                             <button
@@ -265,7 +259,7 @@ function Plans() {
                                 onClick={handlePayment}
                                 disabled={
                                     (selectedPlan === 'Prime' && customAmount < 10000) ||
-                                    txnNumber.length !== 8
+                                    txnNumber.length !== 12
                                 }
                             >
                                 Done
