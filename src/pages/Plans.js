@@ -161,6 +161,7 @@ function Plans() {
                             />
                         )}
 
+                        {/* 🔘 PAY BUTTON */}
                         <button
                             className="pay-btn"
                             onClick={() => {
@@ -173,10 +174,33 @@ function Plans() {
 
                         <p>OR</p>
 
-                        <div className="qr-box">
-                            <img src={qrcode1} alt="QR" className="qr-image" />
-                            <p>supportleveragex@okicici</p>
-                        </div>
+                        {/* 🔥 QR BUTTON (SAME STYLE) */}
+                        <button
+                            className="pay-btn"
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                                gap: "8px",
+                                marginTop: "10px"
+                            }}
+                            onClick={() => {
+                                const link = getUpiLink();
+                                if (link) window.location.href = link;
+                            }}
+                        >
+                            <img
+                                src={qrcode1}
+                                alt="QR"
+                                style={{
+                                    width: "120px",
+                                    borderRadius: "10px",
+                                    background: "white",
+                                    padding: "5px"
+                                }}
+                            />
+                            <span>Scan & Pay via UPI</span>
+                        </button>
 
                         <img src={upiImg} alt="upi" className="upi-img" />
 
