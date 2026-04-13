@@ -1,4 +1,4 @@
-
+```jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -15,9 +15,15 @@ function Plans() {
     const [hasBoughtRapid, setHasBoughtRapid] = useState(false);
     const [currentPlan, setCurrentPlan] = useState(null);
 
-    const [txnNumber, setTxnNumber] = useState(''); // ✅ NEW
+    const [txnNumber, setTxnNumber] = useState('');
 
     const navigate = useNavigate();
+
+    // ✅ UPI LINK ONLY FOR RAPID
+    const getUpiLink = () => {
+        const amount = 1000;
+        return `upi://pay?pa=supportleveragex@okicici&pn=LeverageX&am=${amount}&cu=INR`;
+    };
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -30,7 +36,9 @@ function Plans() {
 
         const fetchUserPlanStatus = async () => {
             try {
-                const response = await axios.get(`https://lx-backend-1-yo5e.onrender.com/api/plans/user-plan/${userId}`);
+                const response = await axios.get(
+                    `https://lx-backend-1-yo5e.onrender.com/api/plans/user-plan/${userId}`
+                );
                 if (response.data) {
                     setHasBoughtRapid(response.data.hasBoughtRapidPlan);
                     setCurrentPlan(response.data.plan);
@@ -58,7 +66,7 @@ function Plans() {
 
             const response = await axios.post(
                 'https://lx-backend-1-yo5e.onrender.com/api/plans/purchase',
-                { userId, plan: selectedPlan, txnNumber } // ✅ send txn
+                { userId, plan: selectedPlan, txnNumber }
             );
 
             if (response.status === 200) {
@@ -151,15 +159,44 @@ function Plans() {
 
                         <p className='pay-here'>Pay Here</p>
 
-                        <img src={qrcode1} alt="QR Code" className="qr-image" />
+                        {/* ✅ QR CLICK ONLY FOR RAPID */}
+                        <img
+                            src={qrcode1}
+                            alt="QR Code"
+                            className="qr-image"
+                            style={{ cursor: selectedPlan === 'Rapid' ? "pointer" : "not-allowed" }}
+                            onClick={() => {
+                                if (selectedPlan === 'Rapid') {
+                                    window.location.href = getUpiLink();
+                                }
+                            }}
+                        />
+
+                        {/* ✅ UPI BUTTON ONLY FOR RAPID */}
+                        {selectedPlan === 'Rapid' && (
+                            <button
+                                className="buy-now-btn"
+                                onClick={() => window.location.href = getUpiLink()}
+                            >
+                                Pay via UPI App
+                            </button>
+                        )}
+
+                        {/* OPTIONAL MESSAGE */}
+                        {selectedPlan !== 'Rapid' && (
+                            <p style={{ fontSize: '12px', color: 'gray' }}>
+                                UPI payment available only for Rapid plan
+                            </p>
+                        )}
 
                         <p className='qr-p qr-pq'>supportleveragex@okicici</p>
 
                         <img src={upiImg} alt="upi-logo" className='upi-img' />
 
+                        {/* ✅ 12 DIGIT TXN INPUT */}
                         <input
                             type="text"
-                            placeholder="Enter  Txn Number"
+                            placeholder="Enter 12-digit Txn Number"
                             className="input-num"
                             value={txnNumber}
                             onChange={(e) => {
@@ -195,3 +232,4 @@ function Plans() {
 }
 
 export default Plans;
+```
