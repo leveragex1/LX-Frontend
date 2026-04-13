@@ -136,8 +136,7 @@ function Plans() {
                 <div className="popup-overlay">
                     <div className="popup">
 
-                        <h2>Complete Payment</h2>
-                        <p>{selectedPlan} Plan</p>
+                        <h1>{selectedPlan} Plan</h1>
 
                         <div className="amount-box">
                             <span>Total</span>
@@ -185,10 +184,6 @@ function Plans() {
                             placeholder="Enter Transaction ID"
                             className="input-num"
                         />
-
-                        <p style={{ color: "red", fontSize: "12px" }}>
-                            Use Google Pay / PhonePe above ₹2000
-                        </p>
 
                         <div className="popup-actions">
                             <button className="done-btn" onClick={handlePayment}>
