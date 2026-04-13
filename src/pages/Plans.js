@@ -155,85 +155,35 @@ function Plans() {
             </div>
 
             {showPopup && (
-  <div className="popup-overlay">
-    <div className="popup qr-background">
-
-      <h2 className="qr-h2">Complete Your Payment</h2>
-      <p className="plan-name">{selectedPlan} Plan</p>
-
-      {/* 💰 Amount Card */}
-      <div className="amount-box">
-        <span>Total Amount</span>
-        <h1>
-          ₹{
-            selectedPlan === 'Rapid'
-              ? 1000
-              : selectedPlan === 'Evolution'
-              ? 5000
-              : customAmount || 0
-          }
-        </h1>
-      </div>
-
-      {/* 🔥 Prime Input */}
-      {selectedPlan === 'Prime' && (
-        <input
-          type="number"
-          placeholder="Enter amount for Prime"
-          value={customAmount}
-          onChange={(e) => setCustomAmount(e.target.value)}
-          className="input-num"
-        />
-      )}
-
-      {/* 🚀 Pay Button */}
-      <button
-        className="pay-btn"
-        onClick={() => {
-          const link = getUpiLink();
-          if (link) window.location.href = link;
-        }}
-      >
-        Pay via UPI App
-      </button>
-
-      <p className="or-text">OR</p>
-
-      {/* 🔳 QR Section */}
-      <div className="qr-box">
-        <img
-          src={qrcode1}
-          alt="QR Code"
-          className="qr-image"
-        />
-        <p className="upi-id">supportleveragex@okicici</p>
-      </div>
-
-      <img src={upiImg} alt="upi-logo" className="upi-img" />
-
-      {/* 🧾 Transaction Input */}
-      <input
-        placeholder="Enter Transaction ID"
-        type="text"
-        className="input-num"
-      />
-
-      {/* ⚠️ Info */}
-      <p className="warning-text">
-        Use Google Pay / PhonePe for payments above ₹2000
-      </p>
-
-      {/* ✅ Actions */}
-      <div className="popup-actions">
-        <button className="done-btn" onClick={handlePayment}>
-          Confirm Payment
-        </button>
+                <div className="popup-overlay ">
+                    <div className="popup qr-background">
+                        <h2 className='qr-h2'>Pay for {selectedPlan}</h2>
+                        <p className='qr-p'>Total:  ₹ {selectedPlan === 'Rapid' ? '1000' : selectedPlan === 'Evolution' ? '5000' : '10,000'} /-</p>
+                        <p className='pay-here'>Pay Here</p>
+                        <img
+    src={qrcode1}
+    alt="QR Code"
+    className="qr-image"
+    style={{ cursor: "pointer" }}
+    onClick={() => {
+        window.location.href = getUpiLink();
+    }}
+/>
         <button
-          className="cancel-btn"
-          onClick={() => setShowPopup(false)}
-        >
-          Cancel
-        </button>
+    onClick={() => {
+        window.location.href = getUpiLink();
+    }}
+    className="buy-now-btn"
+>
+    Pay via UPI App
+</button>
+
+                        <p className='qr-p qr-pq'>supportleveragex@okicici</p>
+                        <img src={upiImg} alt="upi-logo" className='upi-img' />
+                        <input placeholder='Enter Txn Number' type="number" className="input-num" required />
+                        <div className="popup-actions">
+                            <button className="done-btn done-bttn" onClick={handlePayment}>Done</button>
+                            <button className="cancel-btn" onClick={() => setShowPopup(false)}>X</button>
       </div>
 
     </div>
