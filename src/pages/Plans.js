@@ -61,7 +61,7 @@ function Plans() {
         else if (selectedPlan === 'Prime') amount = customAmount;
 
         if (!amount || Number(amount) <= 0) {
-            alert("Please enter valid amount");
+            alert("Please enter a valid amount");
             return;
         }
 
@@ -84,7 +84,7 @@ function Plans() {
                 navigate('/watchlist1');
             }
         } catch (error) {
-            handleError(error.response?.data?.msg || 'Welcome to LeverageX ✨');
+            handleError(error.response?.data?.msg || 'Welcome to LeverageX Team ✨');
             navigate('/watchlist1');
         }
     };
@@ -116,11 +116,15 @@ function Plans() {
 
                             <td>
                                 <button
-                                    className={hasBoughtRapid && plan === 'Rapid' ? "disabled-btn" : "buy-now-btn"}
+                                    className={hasBoughtRapid && plan === 'Rapid'
+                                        ? "disabled-btn"
+                                        : "buy-now-btn"}
                                     onClick={() => buyPlan(plan)}
                                     disabled={hasBoughtRapid && plan === 'Rapid'}
                                 >
-                                    {hasBoughtRapid && plan === 'Rapid' ? 'Used' : 'Buy Now'}
+                                    {hasBoughtRapid && plan === 'Rapid'
+                                        ? 'Plan Used'
+                                        : 'Buy Now'}
                                 </button>
                             </td>
                         </tr>
@@ -128,31 +132,16 @@ function Plans() {
                 </tbody>
             </table>
 
-            {/* 🔥 PROFESSIONAL PAYMENT POPUP */}
             {showPopup && (
                 <div className="popup-overlay">
                     <div className="popup">
 
-                        {/* Header */}
-                        <div style={{ display: "flex", justifyContent: "space-between" }}>
-                            <h3>LeverageX Payment</h3>
-                            <span style={{ cursor: "pointer" }} onClick={() => setShowPopup(false)}>✕</span>
-                        </div>
+                        <h2>Complete Payment</h2>
+                        <p>{selectedPlan} Plan</p>
 
-                        {/* Plan */}
-                        <p style={{ marginTop: "5px", color: "gray" }}>
-                            {selectedPlan} Plan
-                        </p>
-
-                        {/* Amount */}
-                        <div style={{
-                            background: "#f5f5f5",
-                            padding: "15px",
-                            borderRadius: "10px",
-                            marginTop: "10px"
-                        }}>
-                            <p>Total Amount</p>
-                            <h2>
+                        <div className="amount-box">
+                            <span>Total</span>
+                            <h1>
                                 ₹{
                                     selectedPlan === 'Rapid'
                                         ? 1000
@@ -160,76 +149,55 @@ function Plans() {
                                         ? 5000
                                         : customAmount || 0
                                 }
-                            </h2>
+                            </h1>
                         </div>
 
-                        {/* Prime Input */}
                         {selectedPlan === 'Prime' && (
                             <input
                                 type="number"
                                 placeholder="Enter amount"
                                 value={customAmount}
                                 onChange={(e) => setCustomAmount(e.target.value)}
-                                style={{ width: "100%", padding: "10px", marginTop: "10px" }}
+                                className="input-num"
                             />
                         )}
 
-                        {/* Pay Button */}
                         <button
+                            className="pay-btn"
                             onClick={() => {
                                 const link = getUpiLink();
                                 if (link) window.location.href = link;
                             }}
-                            style={{
-                                width: "100%",
-                                padding: "12px",
-                                background: "#0f9d58",
-                                color: "white",
-                                border: "none",
-                                borderRadius: "8px",
-                                marginTop: "10px",
-                                cursor: "pointer"
-                            }}
                         >
-                            Pay via UPI App
+                            Pay via UPI
                         </button>
 
-                        <p style={{ margin: "10px 0" }}>OR</p>
+                        <p>OR</p>
 
-                        {/* QR */}
-                        <div style={{ textAlign: "center" }}>
-                            <img src={qrcode1} alt="QR" style={{ width: "150px" }} />
+                        <div className="qr-box">
+                            <img src={qrcode1} alt="QR" className="qr-image" />
                             <p>supportleveragex@okicici</p>
                         </div>
 
-                        <img src={upiImg} alt="upi" style={{ width: "120px", marginTop: "10px" }} />
+                        <img src={upiImg} alt="upi" className="upi-img" />
 
-                        {/* Txn */}
                         <input
                             placeholder="Enter Transaction ID"
-                            style={{ width: "100%", padding: "10px", marginTop: "10px" }}
+                            className="input-num"
                         />
 
                         <p style={{ color: "red", fontSize: "12px" }}>
                             Use Google Pay / PhonePe above ₹2000
                         </p>
 
-                        {/* Confirm */}
-                        <button
-                            onClick={handlePayment}
-                            style={{
-                                width: "100%",
-                                padding: "12px",
-                                background: "black",
-                                color: "white",
-                                border: "none",
-                                borderRadius: "8px",
-                                marginTop: "10px",
-                                cursor: "pointer"
-                            }}
-                        >
-                            Confirm Payment
-                        </button>
+                        <div className="popup-actions">
+                            <button className="done-btn" onClick={handlePayment}>
+                                Confirm
+                            </button>
+                            <button className="cancel-btn" onClick={() => setShowPopup(false)}>
+                                Cancel
+                            </button>
+                        </div>
 
                     </div>
                 </div>
