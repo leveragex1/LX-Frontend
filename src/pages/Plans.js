@@ -24,10 +24,6 @@ function Plans() {
         const amount =
             selectedPlan === 'Rapid'
                 ? 1000
-                : selectedPlan === 'Evolution'
-                ? 5000
-                : customAmount;
-
         return `upi://pay?pa=supportleveragex@okicici&pn=LeverageX&am=${amount}&cu=INR`;
     };
 
