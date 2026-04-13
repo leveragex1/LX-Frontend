@@ -136,8 +136,7 @@ function Plans() {
                 <div className="popup-overlay">
                     <div className="popup">
 
-                        <h2>Complete Payment</h2>
-                        <p>{selectedPlan} Plan</p>
+                        <h2>{selectedPlan} Plan</h2>
 
                         <div className="amount-box">
                             <span>Total</span>
