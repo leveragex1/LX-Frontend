@@ -18,10 +18,10 @@ function Plans() {
     const getUpiLink = () => {
     const amount =
         selectedPlan === 'Rapid'
-            ? 1000
+            ? `upi://pay?pa=supportleveragex@okicici&pn=LeverageX&am=${amount}&cu=INR`
             : selectedPlan === 'Evolution'
-            ? 5000
-            : 10000;
+            ? `upi://pay?pa=supportleveragex@okicici&pn=LeverageX&am=${amount}&cu=INR`
+            : `upi://pay?pa=supportleveragex@okicici&pn=LeverageX&am=${amount}&cu=INR`
 
     return `upi://pay?pa=supportleveragex@okicici&pn=LeverageX&am=${amount}&cu=INR`;
 };
