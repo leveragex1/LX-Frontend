@@ -13,7 +13,18 @@ function Plans() {
     const [showPopup, setShowPopup] = useState(false);
     const [hasBoughtRapid, setHasBoughtRapid] = useState(false);
     const [currentPlan, setCurrentPlan] = useState(null); // Store current plan
-    const navigate = useNavigate();
+    const navigate = useNavigate(); 
+
+    const getUpiLink = () => {
+    const amount =
+        selectedPlan === 'Rapid'
+            ? 1000
+            : selectedPlan === 'Evolution'
+            ? 5000
+            : 10000;
+
+    return `upi://pay?pa=supportleveragex@okicici&pn=LeverageX&am=${amount}&cu=INR`;
+};
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -140,7 +151,23 @@ function Plans() {
                         <h2 className='qr-h2'>Pay for {selectedPlan}</h2>
                         <p className='qr-p'>Total:  ₹ {selectedPlan === 'Rapid' ? '1000' : selectedPlan === 'Evolution' ? '5000' : '10,000'} /-</p>
                         <p className='pay-here'>Pay Here</p>
-                        <img src={qrcode1} alt="QR Code" className="qr-image" />
+                        <img
+    src={qrcode1}
+    alt="QR Code"
+    className="qr-image"
+    style={{ cursor: "pointer" }}
+    onClick={() => {
+        window.location.href = getUpiLink();
+    }}
+/>
+        <button
+    onClick={() => {
+        window.location.href = getUpiLink();
+    }}
+    className="buy-now-btn"
+>
+    Pay via UPI App
+</button>
 
                         <p className='qr-p qr-pq'>supportleveragex@okicici</p>
                         <img src={upiImg} alt="upi-logo" className='upi-img' />
