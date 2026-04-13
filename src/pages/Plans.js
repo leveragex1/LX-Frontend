@@ -36,7 +36,7 @@ function Plans() {
                     setCurrentPlan(response.data.plan);
                 }
             } catch (error) {
-                console.error("Error fetching user plan status:", error);
+                console.error(error);
             }
         };
 
@@ -116,15 +116,15 @@ function Plans() {
 
                             <td>
                                 <button
-                                    className={hasBoughtRapid && plan === 'Rapid'
-                                        ? "disabled-btn"
-                                        : "buy-now-btn"}
+                                    style={{
+                                        padding: "12px 20px",
+                                        fontSize: "16px",
+                                        borderRadius: "10px"
+                                    }}
+                                    className="buy-now-btn"
                                     onClick={() => buyPlan(plan)}
-                                    disabled={hasBoughtRapid && plan === 'Rapid'}
                                 >
-                                    {hasBoughtRapid && plan === 'Rapid'
-                                        ? 'Plan Used'
-                                        : 'Buy Now'}
+                                    Buy Now
                                 </button>
                             </td>
                         </tr>
@@ -136,7 +136,8 @@ function Plans() {
                 <div className="popup-overlay">
                     <div className="popup">
 
-                        <h2>{selectedPlan} Plan</h2>
+                        <h2>Complete Payment</h2>
+                        <p>{selectedPlan} Plan</p>
 
                         <div className="amount-box">
                             <span>Total</span>
@@ -161,7 +162,16 @@ function Plans() {
                             />
                         )}
 
+                        {/* 🔥 BIG PAY BUTTON */}
                         <button
+                            style={{
+                                width: "100%",
+                                padding: "16px",
+                                fontSize: "18px",
+                                fontWeight: "bold",
+                                borderRadius: "12px",
+                                marginTop: "10px"
+                            }}
                             className="pay-btn"
                             onClick={() => {
                                 const link = getUpiLink();
@@ -185,6 +195,9 @@ function Plans() {
                             className="input-num"
                         />
 
+                        <p style={{ color: "red", fontSize: "12px" }}>
+                            Use Google Pay / PhonePe above ₹2000
+                        </p>
 
                         <div className="popup-actions">
                             <button className="done-btn" onClick={handlePayment}>
