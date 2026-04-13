@@ -1,3 +1,4 @@
+```jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -13,7 +14,9 @@ function Plans() {
     const [showPopup, setShowPopup] = useState(false);
     const [hasBoughtRapid, setHasBoughtRapid] = useState(false);
     const [currentPlan, setCurrentPlan] = useState(null);
-    const [customAmount, setCustomAmount] = useState(10000); // ✅ NEW
+
+    const [customAmount, setCustomAmount] = useState(10000); // Prime amount
+    const [txnNumber, setTxnNumber] = useState(''); // ✅ Txn number
 
     const navigate = useNavigate();
 
@@ -23,7 +26,7 @@ function Plans() {
                 ? 1000
                 : selectedPlan === 'Evolution'
                 ? 5000
-                : customAmount; // ✅ Prime custom
+                : customAmount;
 
         return `upi://pay?pa=supportleveragex@okicici&pn=LeverageX&am=${amount}&cu=INR`;
     };
@@ -73,7 +76,8 @@ function Plans() {
                 {
                     userId,
                     plan: selectedPlan,
-                    amount: selectedPlan === 'Prime' ? customAmount : undefined
+                    amount: selectedPlan === 'Prime' ? customAmount : undefined,
+                    txnNumber // ✅ send txn number
                 }
             );
 
@@ -173,12 +177,12 @@ function Plans() {
 
                     <div className='amt'>
                         <h3>Evolution Plan (₹ 5,000)</h3>
-                        <p>Grow your trading with more capital and flexibility.</p>
+                        <p>Grow your trading with more capital.</p>
                     </div>
 
                     <div className='amt'>
                         <h3>Prime Plan (Custom ₹10,000+)</h3>
-                        <p>Enter your own amount and trade with higher capital.</p>
+                        <p>Enter your own amount and scale trading.</p>
                     </div>
                 </div>
             </section>
@@ -200,7 +204,7 @@ function Plans() {
                             } /-
                         </p>
 
-                        {/* ✅ PRIME INPUT */}
+                        {/* Prime Amount Input */}
                         {selectedPlan === 'Prime' && (
                             <input
                                 type="number"
@@ -234,21 +238,35 @@ function Plans() {
                         </button>
 
                         <p className='qr-p qr-pq'>supportleveragex@okicici</p>
-
                         <img src={upiImg} alt="upi-logo" className='upi-img' />
 
+                        {/* Txn Number Input */}
                         <input
-                            placeholder='Enter Txn Number'
-                            type="number"
+                            type="text"
+                            placeholder="Enter 8-digit Txn Number"
                             className="input-num"
-                            required
+                            value={txnNumber}
+                            onChange={(e) => {
+                                const value = e.target.value.replace(/\D/g, '');
+                                setTxnNumber(value);
+                            }}
                         />
+
+                        {/* Validation Message */}
+                        {txnNumber && txnNumber.length !== 8 && (
+                            <p style={{ color: 'red', fontSize: '12px' }}>
+                                Transaction number must be exactly 8 digits
+                            </p>
+                        )}
 
                         <div className="popup-actions">
                             <button
                                 className="done-btn done-bttn"
                                 onClick={handlePayment}
-                                disabled={selectedPlan === 'Prime' && customAmount < 10000}
+                                disabled={
+                                    (selectedPlan === 'Prime' && customAmount < 10000) ||
+                                    txnNumber.length !== 8
+                                }
                             >
                                 Done
                             </button>
@@ -271,3 +289,4 @@ function Plans() {
 }
 
 export default Plans;
+```
