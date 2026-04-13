@@ -252,20 +252,13 @@ function Plans() {
                             }}
                         />
 
-                        {/* Validation Message */}
-                        {txnNumber && txnNumber.length !== 8 && (
-                            <p style={{ color: 'red', fontSize: '12px' }}>
-                                Transaction number must be exactly 8 digits
-                            </p>
-                        )}
-
                         <div className="popup-actions">
                             <button
                                 className="done-btn done-bttn"
                                 onClick={handlePayment}
                                 disabled={
                                     (selectedPlan === 'Prime' && customAmount < 10000) ||
-                                    txnNumber.length !== 8
+                                    txnNumber.length !== 12
                                 }
                             >
                                 Done
