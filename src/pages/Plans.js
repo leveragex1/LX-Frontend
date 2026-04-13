@@ -29,7 +29,7 @@ function Plans() {
         const fetchUserPlanStatus = async () => {
             try {
                 const response = await axios.get(
-                    https://lx-backend-1-yo5e.onrender.com/api/plans/user-plan/${userId}
+                    `https://lx-backend-1-yo5e.onrender.com/api/plans/user-plan/${userId}`
                 );
                 if (response.data) {
                     setHasBoughtRapid(response.data.hasBoughtRapidPlan);
@@ -65,7 +65,7 @@ function Plans() {
             return;
         }
 
-        return upi://pay?pa=supportleveragex@okicici&pn=LeverageX&am=${amount}&cu=INR;
+        return `upi://pay?pa=supportleveragex@okicici&pn=LeverageX&am=${amount}&cu=INR`;
     };
 
     const handlePayment = async () => {
@@ -136,7 +136,7 @@ function Plans() {
                 <div className="popup-overlay">
                     <div className="popup">
 
-                      <h2>{selectedPlan} Plan</h2>
+                        <h2>{selectedPlan} Plan</h2>
 
                         <div className="amount-box">
                             <span>Total</span>
@@ -185,6 +185,7 @@ function Plans() {
                             className="input-num"
                         />
 
+                        
                         <div className="popup-actions">
                             <button className="done-btn" onClick={handlePayment}>
                                 Confirm
