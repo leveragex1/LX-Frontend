@@ -155,40 +155,71 @@ function Plans() {
             </div>
 
             {showPopup && (
-                <div className="popup-overlay ">
+                <div className="popup-overlay">
                     <div className="popup qr-background">
                         <h2 className='qr-h2'>Pay for {selectedPlan}</h2>
-                        <p className='qr-p'>Total:  ₹ {selectedPlan === 'Rapid' ? '1000' : selectedPlan === 'Evolution' ? '5000' : '10,000'} /-</p>
+
+                        {/* ✅ Amount Display */}
+                        <p className='qr-p'>
+                            Total: ₹ {
+                                selectedPlan === 'Rapid'
+                                    ? 1000
+                                    : selectedPlan === 'Evolution'
+                                    ? 5000
+                                    : customAmount || 0
+                            } /-
+                        </p>
+
+                        {/* 🔥 Input for Prime only */}
+                        {selectedPlan === 'Prime' && (
+                            <input
+                                type="number"
+                                placeholder="Enter amount for Prime"
+                                value={customAmount}
+                                onChange={(e) => setCustomAmount(e.target.value)}
+                                className="input-num"
+                            />
+                        )}
+
                         <p className='pay-here'>Pay Here</p>
+
+                        {/* 🔥 Clickable QR */}
                         <img
-    src={qrcode1}
-    alt="QR Code"
-    className="qr-image"
-    style={{ cursor: "pointer" }}
-    onClick={() => {
-        window.location.href = getUpiLink();
-    }}
-/>
-        <button
-    onClick={() => {
-        window.location.href = getUpiLink();
-    }}
-    className="buy-now-btn"
->
-    Pay via UPI App
-</button>
+                            src={qrcode1}
+                            alt="QR Code"
+                            className="qr-image"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => {
+                                const link = getUpiLink();
+                                if (link) window.location.href = link;
+                            }}
+                        />
 
-                        <p className='qr-p qr-pq'>supportleveragex@okicici</p>
+                        <p className='qr-p'>supportleveragex@okicici</p>
                         <img src={upiImg} alt="upi-logo" className='upi-img' />
-                        <input placeholder='Enter Txn Number' type="number" className="input-num" required />
-                        <div className="popup-actions">
-                            <button className="done-btn done-bttn" onClick={handlePayment}>Done</button>
-                            <button className="cancel-btn" onClick={() => setShowPopup(false)}>X</button>
-      </div>
 
-    </div>
-  </div>
-)}
+                        {/* ⚠️ Important instruction */}
+                        <p style={{ color: "red", fontSize: "14px" }}>
+                            ⚠️ For payments above ₹2000, use Google Pay / PhonePe (WhatsApp may fail)
+                        </p>
+
+                        <input
+                            placeholder='Enter Txn Number'
+                            type="number"
+                            className="input-num"
+                            required
+                        />
+
+                        <div className="popup-actions">
+                            <button className="done-btn" onClick={handlePayment}>
+                                Done
+                            </button>
+                            <button
+                                className="cancel-btn"
+                                onClick={() => setShowPopup(false)}
+                            >
+                                X
+                            </button>
                         </div>
                     </div>
                 </div>
