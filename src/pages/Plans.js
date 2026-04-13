@@ -36,7 +36,7 @@ function Plans() {
                     setCurrentPlan(response.data.plan);
                 }
             } catch (error) {
-                console.error(error);
+                console.error("Error fetching user plan status:", error);
             }
         };
 
@@ -116,15 +116,15 @@ function Plans() {
 
                             <td>
                                 <button
-                                    style={{
-                                        padding: "12px 20px",
-                                        fontSize: "16px",
-                                        borderRadius: "10px"
-                                    }}
-                                    className="buy-now-btn"
+                                    className={hasBoughtRapid && plan === 'Rapid'
+                                        ? "disabled-btn"
+                                        : "buy-now-btn"}
                                     onClick={() => buyPlan(plan)}
+                                    disabled={hasBoughtRapid && plan === 'Rapid'}
                                 >
-                                    Buy Now
+                                    {hasBoughtRapid && plan === 'Rapid'
+                                        ? 'Plan Used'
+                                        : 'Buy Now'}
                                 </button>
                             </td>
                         </tr>
@@ -162,16 +162,7 @@ function Plans() {
                             />
                         )}
 
-                        {/* 🔥 BIG PAY BUTTON */}
                         <button
-                            style={{
-                                width: "100%",
-                                padding: "16px",
-                                fontSize: "18px",
-                                fontWeight: "bold",
-                                borderRadius: "12px",
-                                marginTop: "10px"
-                            }}
                             className="pay-btn"
                             onClick={() => {
                                 const link = getUpiLink();
