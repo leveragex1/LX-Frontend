@@ -22,7 +22,7 @@ function Plans() {
     // ✅ UPI LINK ONLY FOR RAPID
     const getUpiLink = () => {
         const amount = 1000;
-        return `upi://pay?pa=supportleveragex@okicici&pn=LeverageX&am=${amount}&cu=INR`;
+        return `upi://pay?pa=leveragexfundon-3@oksbi&pn=LeverageX&am=${amount}&cu=INR`;
     };
 
     useEffect(() => {
@@ -189,7 +189,7 @@ function Plans() {
                             </p>
                         )}
 
-                        <p className='qr-p qr-pq'>leveragexfundon-1@okaxis</p>
+                        <p className='qr-p qr-pq'>leveragexfundon-3@oksbi</p>
 
                         <img src={upiImg} alt="upi-logo" className='upi-img' />
 
