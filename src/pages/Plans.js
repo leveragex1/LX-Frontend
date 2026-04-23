@@ -172,22 +172,6 @@ function Plans() {
                             }}
                         />
 
-                        {/* ✅ UPI BUTTON ONLY FOR RAPID */}
-                        {selectedPlan === 'Rapid' && (
-                            <button
-                                className="buy-now-btn"
-                                onClick={() => window.location.href = getUpiLink()}
-                            >
-                                Pay via UPI App
-                            </button>
-                        )}
-
-                        {/* OPTIONAL MESSAGE */}
-                        {selectedPlan !== 'Rapid' && (
-                            <p style={{ fontSize: '12px', color: 'gray' }}>
-                                UPI payment available only for Rapid plan
-                            </p>
-                        )}
 
                         <p className='qr-p qr-pq'>leveragexfundon-3@oksbi</p>
                         <p className='qr-p qr-pq'>leveragexfundon-1@okicici</p>
