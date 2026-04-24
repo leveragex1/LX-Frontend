@@ -173,7 +173,7 @@ function Plans() {
                         />
 
 
-                        <p className='qr-p qr-pq'>leveragexfundon-3@oksbi</p>
+                        <p className='qr-p qr-pq'>leveragexfundon@okaxis</p>
 
                         <p className='qr-p qr-pq'>leveragexfundon@okhdfcbank</p>
 
