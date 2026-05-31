@@ -161,16 +161,16 @@ function Plans() {
 
                         {/* ✅ QR CLICK ONLY FOR RAPID */}
                         <img
-                            src={qrcode1}
-                            alt="QR Co
-                            className="qr-image"
-                            style={{ cursor: selectedPlan === 'Rapid' ? "pointer" : "not-allowed" }}
-                            onClick={() => {
-                                if (selectedPlan === 'Rapid') {
-                                    window.location.href = getUpiLink();
-                                }
-                            }}
-                        />
+    src={qrcode1}
+    alt="QR Code"
+    className="qr-image"
+    style={{ cursor: selectedPlan === 'Rapid' ? "pointer" : "not-allowed" }}
+    onClick={() => {
+        if (selectedPlan === 'Rapid') {
+            window.location.href = getUpiLink();
+        }
+    }}
+/>
 
 
                         <p className='qr-p qr-pq'>leveragexfundx-2@okicici</p>
