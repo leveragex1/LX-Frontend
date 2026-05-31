@@ -162,7 +162,7 @@ function Plans() {
                         {/* ✅ QR CLICK ONLY FOR RAPID */}
                         <img
                             src={qrcode1}
-                            alt="QR Code"
+                            alt="QR Co
                             className="qr-image"
                             style={{ cursor: selectedPlan === 'Rapid' ? "pointer" : "not-allowed" }}
                             onClick={() => {
@@ -173,7 +173,7 @@ function Plans() {
                         />
 
 
-                        <p className='qr-p qr-pq'>7219088334@upi</p>
+                        <p className='qr-p qr-pq'>leveragexfundx-2@okicici</p>
 
                         <p className='qr-p qr-pq'>leveragxcradit@ptyes</p>
 
