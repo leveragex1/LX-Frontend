@@ -175,7 +175,7 @@ function Plans() {
 
                         <p className='qr-p qr-pq'></p>
 
-                        <p className='qr-p qr-pq'>leveragxcradit@ptyes</p>
+                        <p className='qr-p qr-pq'>leveragexcradit@ptyes</p>
 
                         <img src={upiImg} alt="upi-logo" className='upi-img' />
 
