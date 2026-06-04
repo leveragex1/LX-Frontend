@@ -37,7 +37,7 @@ function Plans() {
         const fetchUserPlanStatus = async () => {
             try {
                 const response = await axios.get(
-                    `https://lx-backend-rzgv.onrender.com/api/plans/user-plan/${userId}`
+                    `https://lx-backend-ky0a.onrender.com/api/plans/user-plan/${userId}`
                 );
                 if (response.data) {
                     setHasBoughtRapid(response.data.hasBoughtRapidPlan);
@@ -65,7 +65,7 @@ function Plans() {
             const userId = localStorage.getItem('userId');
 
             const response = await axios.post(
-                'https://lx-backend-rzgv.onrender.com/api/plans/purchase',
+                'https://lx-backend-ky0a.onrender.com/api/plans/purchase',
                 { userId, plan: selectedPlan, txnNumber }
             );
 
