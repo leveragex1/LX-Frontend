@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -13,35 +12,25 @@ function Plans() {
     const [selectedPlan, setSelectedPlan] = useState(null);
     const [showPopup, setShowPopup] = useState(false);
     const [hasBoughtRapid, setHasBoughtRapid] = useState(false);
-    const [currentPlan, setCurrentPlan] = useState(null);
-
-    const [txnNumber, setTxnNumber] = useState('');
-
+    const [currentPlan, setCurrentPlan] = useState(null); // Store current plan
     const navigate = useNavigate();
-
-    // ✅ UPI LINK ONLY FOR RAPID
-    const getUpiLink = () => {
-        const amount = 1000;
-        return `upi://pay?pa=leveragexfundon-3@oksbi&pn=LeverageX&am=${amount}&cu=INR`;
-    };
 
     useEffect(() => {
         const token = localStorage.getItem('token');
         const userId = localStorage.getItem('userId');
 
         if (!token) {
+            console.error("User is not logged in. Redirecting to login page.");
             navigate('/login');
             return;
         }
 
         const fetchUserPlanStatus = async () => {
             try {
-                const response = await axios.get(
-                    `https://lx-backend-fleb.onrender.com/api/plans/user-plan/${userId}`
-                );
+                const response = await axios.get(`https://lx-backend-k6r1.onrender.com/api/plans/user-plan/${userId}`);
                 if (response.data) {
-                    setHasBoughtRapid(response.data.hasBoughtRapidPlan);
-                    setCurrentPlan(response.data.plan);
+                    setHasBoughtRapid(response.data.hasBoughtRapidPlan);  // Set Rapid plan status
+                    setCurrentPlan(response.data.plan);  // Set current plan
                 }
             } catch (error) {
                 console.error("Error fetching user plan status:", error);
@@ -63,32 +52,30 @@ function Plans() {
     const handlePayment = async () => {
         try {
             const userId = localStorage.getItem('userId');
-
-            const response = await axios.post(
-                'https://lx-backend-fleb.onrender.com/api/plans/purchase',
-                { userId, plan: selectedPlan, txnNumber }
-            );
+            const response = await axios.post('https://lx-backend-k6r1.onrender.com/api/plans/purchase', { userId, plan: selectedPlan });
 
             if (response.status === 200) {
                 handleSuccess(response.data.msg);
                 setShowPopup(false);
-                setCurrentPlan(selectedPlan);
-
+                setCurrentPlan(selectedPlan); // Set the current plan after purchase
                 if (selectedPlan === 'Rapid') {
                     setHasBoughtRapid(true);
+                    navigate('/watchlist1');
+                } else if (selectedPlan === 'Evolution' || selectedPlan === 'Prime') {
+                    navigate('/watchlist1');
                 }
-
-                navigate('/watchlist1');
             }
-        } catch (error) {
-            handleError(error.response?.data?.msg || 'Welcome to LeverageX Team ✨');
-            navigate('/watchlist1');
         }
+        catch (error) {
+                handleError(error.response?.data?.msg || 'Welcome to LeverageX Team ✨');
+                navigate('/watchlist1');
+           }
     };
 
     return (
         <div className="plans-container">
             <h1 className="plans-title">Membership Plans</h1>
+            {/* <p>Current Plan: {currentPlan ? currentPlan : 'No Plan Selected'}</p>  */}
 
             <div className="plans-container">
                 <table className="plans-table">
@@ -103,7 +90,6 @@ function Plans() {
                             <th>Action</th>
                         </tr>
                     </thead>
-
                     <tbody className='membership-plan'>
                         {['Rapid', 'Evolution', 'Prime'].map((plan, index) => (
                             <tr key={index}>
@@ -113,7 +99,6 @@ function Plans() {
                                 <td>10X</td>
                                 <td>{plan === 'Rapid' ? '₹1,000' : plan === 'Evolution' ? '₹5,000' : '₹10,000'}</td>
                                 <td>{plan === 'Rapid' ? 'One Time' : 'Unlimited'}</td>
-
                                 <td>
                                     <button
                                         className={hasBoughtRapid && plan === 'Rapid' ? "disabled-btn" : "buy-now-btn"}
@@ -133,85 +118,40 @@ function Plans() {
                 <h2>Choose Your Plan</h2>
                 <div className='plan-amt'>
                     <div className='amt'>
-                        <h3>Rapid Plan (₹ 1,000)</h3>
-                        <p>Perfect for traders who want to start small and fast.</p>
+                       <h3>Rapid Plan (₹ 1,000)</h3>
+                        <p>Perfect for traders who want to start small and fast. For just Rs 1,000, you can join our Rapid Plan and start trading with leveraged capital. This plan is ideal for newer traders looking to test the waters or experienced traders who want quick access to funds with a low entry barrier.</p>
                     </div>
                     <div className='amt'>
-                        <h3>Evolution Plan (₹ 5,000)</h3>
-                        <p>Take your trading to the next level.</p>
+                       <h3>Evolution Plan (₹ 5,000)</h3>
+                        <p>Designed for those who are ready to take their trading to the next level, the Evolution Plan gives you a larger amount of capital and more flexibility. With an affordable Rs 5,000 upfront cost, this plan is ideal for traders who are confident in their strategies and are looking to grow their trading portfolios.</p>
                     </div>
                     <div className='amt'>
                         <h3>Prime Plan (₹ 10,000)</h3>
-                        <p>For serious traders with high capital.</p>
+                        <p>For serious traders aiming to trade with large amounts of capital and maximize their profit potential, the Prime Plan offers the highest funding level. At Rs 10,000, this plan is built for experienced traders who want to significantly scale up their operations and have access to substantial funding. If you're ready to trade like a pro, the Prime Plan is for you.</p>
                     </div>
                 </div>
+
             </section>
 
+
             {showPopup && (
-                <div className="popup-overlay">
+                <div className="popup-overlay ">
                     <div className="popup qr-background">
-
                         <h2 className='qr-h2'>Pay for {selectedPlan}</h2>
-
-                        <p className='qr-p'>
-                            Total: ₹ {selectedPlan === 'Rapid' ? '1000' : selectedPlan === 'Evolution' ? '5000' : '10,000'} /-
-                        </p>
-
+                        <p className='qr-p'>Total:  ₹ {selectedPlan === 'Rapid' ? '1000' : selectedPlan === 'Evolution' ? '5000' : '10,000'} /-</p>
                         <p className='pay-here'>Pay Here</p>
+                        <img src={qrcode1} alt="QR Code" className="qr-image" />
 
-                        {/* ✅ QR CLICK ONLY FOR RAPID */}
-                        <img
-    src={qrcode1}
-    alt="QR Code"
-    className="qr-image"
-    style={{ cursor: selectedPlan === 'Rapid' ? "pointer" : "not-allowed" }}
-    onClick={() => {
-        if (selectedPlan === 'Rapid') {
-            window.location.href = getUpiLink();
-        }
-    }}
-/>
-
-
-                        <p className='qr-p qr-pq'></p>
-
-                        <p className='qr-p qr-pq'>leveragxcradit@ptyes</p>
-
+                        <p className='qr-p qr-pq'>leveragexfund-2@okaxis</p>
                         <img src={upiImg} alt="upi-logo" className='upi-img' />
-
-                        {/* ✅ 12 DIGIT TXN INPUT */}
-                        <input
-                            type="text"
-                            placeholder="Enter 12-digit Txn Number"
-                            className="input-num"
-                            value={txnNumber}
-                            onChange={(e) => {
-                                const value = e.target.value.replace(/\D/g, '');
-                                setTxnNumber(value);
-                            }}
-                        />
-
+                        <input placeholder='Enter Txn Number' type="number" className="input-num" required />
                         <div className="popup-actions">
-                            <button
-                                className="done-btn done-bttn"
-                                onClick={handlePayment}
-                                disabled={txnNumber.length !== 12}
-                            >
-                                Done
-                            </button>
-
-                            <button
-                                className="cancel-btn"
-                                onClick={() => setShowPopup(false)}
-                            >
-                                X
-                            </button>
+                            <button className="done-btn done-bttn" onClick={handlePayment}>Done</button>
+                            <button className="cancel-btn" onClick={() => setShowPopup(false)}>X</button>
                         </div>
-
                     </div>
                 </div>
             )}
-
             <ToastContainer />
         </div>
     );
