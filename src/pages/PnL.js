@@ -24,7 +24,7 @@ const PnL = () => {
   const fetchUserStocks = async () => {
     try {
       const response = await axios.get(
-        `https://lx-backend-1-916j.onrender.com/api/users/stocks/${userId}`
+        `https://ashish-backend-myql.onrender.com/api/users/stocks/${userId}`
       );
       setStocks(response.data.stocks);
       setUserBalance(response.data.balance);
@@ -40,7 +40,7 @@ const PnL = () => {
       const watchlistType =
         storedWatchlistType || location.state?.watchlistType || "1"; // Default to WatchList1 if none is found
       const response = await axios.get(
-        `https://lx-backend-1-916j.onrender.com/api/watchlist${watchlistType}`
+        `https://ashish-backend-myql.onrender.com/api/watchlist${watchlistType}`
       );
       setUpdatedStocks(response.data);
     } catch (error) {
@@ -68,7 +68,7 @@ const PnL = () => {
         localStorage.getItem("watchlistType") ||
         "1";
       const response = await axios.post(
-        "https://lx-backend-1-916j.onrender.com/api/users/sell",
+        "https://ashish-backend-myql.onrender.com/api/users/sell",
         {
           userId,
           stockName,
@@ -138,7 +138,7 @@ const PnL = () => {
     const fetchPayoutStatus = async () => {
       try {
         const response = await axios.get(
-          `https://lx-backend-1-916j.onrender.com/api/payout/users/${userId}`
+          `https://ashish-backend-myql.onrender.com/api/payout/users/${userId}`
         );
         setPayoutStatus(response.data.payoutStatus); // Assuming backend sends payoutStatus now
       } catch (err) {
@@ -218,10 +218,10 @@ const PnL = () => {
               </div>
 
               <button
-        onClick={() => handleSell(stock.stockName, stock.quantity)}
+                onClick={() => handleSell(stock.stockName, stock.quantity)}
                 className="sell-btn"
               >
-               Sell
+                Sell
               </button>
             </div>
           );
